@@ -1,3 +1,48 @@
 [build-system]
-requires = ["setuptools>=42"]
-build-backend = "setuptools.build_meta"
+requires = ["uv_build>=0.6"]
+build-backend = "uv_build"
+
+[project]
+name = "sshme"
+version = "2.0.0"
+description = "An interactive menu for selecting an SSH profile."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Kurt Stolle", email = "k.h.w.stolle@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = [
+    "questionary>=2.0",
+]
+
+[project.urls]
+Repository = "https://github.com/khwstolle/sshme"
+"Bug Tracker" = "https://github.com/khwstolle/sshme/issues"
+
+[project.scripts]
+sshme = "sshme:entry_point"
+
+[tool.uv]
+package = true
+
+[tool.uv.build-backend]
+module-root = "sources"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
